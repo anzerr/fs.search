@@ -14,7 +14,8 @@ const Search = require('fs.search');
 const f = new Search({
     regex: /[0-9A-Za-z]{32}/gi,
     filterFolder: () => true,
-    skipEvents: true
+    skipEvents: true,
+    max: 5
 });
 f.get('./').then((found) => {
     console.log(found);
@@ -23,7 +24,8 @@ f.get('./').then((found) => {
 // or
 
 const f2 = new Search({
-    regex: /[0-9A-Za-z]{32}/gi
+    regex: /[0-9A-Za-z]{32}/gi,
+    max: 5
 });
 f2.on('found', ({file, found}) => {
     console.log(file, found);

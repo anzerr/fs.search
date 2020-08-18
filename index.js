@@ -9,14 +9,14 @@ class Search extends events {
     constructor(option = {}) {
         super();
         this.option = option;
-        this.found = {};
+        this.reset();
         if (!(this.option.regex instanceof RegExp)) {
             throw new Error('regex should be an instance of RegExp');
         }
     }
 
     stream() {
-        const backlog = [];
+        let backlog = [];
 		return new Transform({
 			objectMode: true,
 			transform: (data, encoding, callback) => {
@@ -32,10 +32,11 @@ class Search extends events {
 				} catch (err) {
 					callback(err);
 				}
+            },
+            flush: (callback) => {
+                backlog = null;
+                callback(null, []);
             }
-            /*) => {
-                callback(null, Buffer.concat(backlog).toString().match(this.option.regex) || []);
-            }*/
 		});
 	}
 
@@ -46,7 +47,10 @@ class Search extends events {
             fs.createReadStream(file).pipe(this.stream()).on('data', (data) => {
                 for (let i in data) {
                     if (this.option.skipEvents) {
-                        this.found[data[i]] = true;
+                        if (!this.found[data[i]]) {
+                            this.foundCount += 1;
+                            this.found[data[i]] = true;
+                        }
                     } else {
                         found[data[i]] = true;
                         hasFound = true;
@@ -57,8 +61,14 @@ class Search extends events {
                     this.emit('found', {file, found});
                 }
                 resolve();
-            })
+            });
         });
+    }
+
+    reset() {
+        this.found = {};
+        this.foundCount = 0;
+        return this;
     }
 
     get(dir) {
@@ -69,7 +79,7 @@ class Search extends events {
                     return this.match(path);
                 }
             },
-            max: 1
+            max: this.option.max || 1
         }).then(() => this.found);
     }
 
