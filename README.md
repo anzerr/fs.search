@@ -1,8 +1,8 @@
 
 ### `Intro`
-![GitHub Actions status | linter](https://github.com/anzerr/fs.mkdirp/workflows/linter/badge.svg)
-![GitHub Actions status | publish](https://github.com/anzerr/fs.mkdirp/workflows/publish/badge.svg)
-![GitHub Actions status | test](https://github.com/anzerr/fs.mkdirp/workflows/test/badge.svg)
+![GitHub Actions status | linter](https://github.com/anzerr/fs.search/workflows/linter/badge.svg)
+![GitHub Actions status | publish](https://github.com/anzerr/fs.search/workflows/publish/badge.svg)
+![GitHub Actions status | test](https://github.com/anzerr/fs.search/workflows/test/badge.svg)
 
 Search for a given regex recursive in all files in a directory
 
