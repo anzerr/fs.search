@@ -1,10 +1,15 @@
 
 ### `Intro`
+![GitHub Actions status | linter](https://github.com/anzerr/fs.mkdirp/workflows/linter/badge.svg)
+![GitHub Actions status | publish](https://github.com/anzerr/fs.mkdirp/workflows/publish/badge.svg)
+![GitHub Actions status | test](https://github.com/anzerr/fs.mkdirp/workflows/test/badge.svg)
+
 Search for a given regex recursive in all files in a directory
 
 #### `Install`
 ``` bash
 npm install --save git+https://git@github.com/anzerr/fs.search.git
+npm install --save @anzerr/fs.search
 ```
 
 ### `Example`
