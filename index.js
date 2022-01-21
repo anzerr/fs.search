@@ -34,8 +34,7 @@ class Search extends events {
 				}
             },
             flush: (callback) => {
-                backlog = null;
-                callback(null, []);
+                callback(null, Buffer.concat(backlog).toString().match(this.option.regex) || []);
             }
 		});
 	}
